@@ -4,12 +4,12 @@ import lombok.*;
 import umc.springDemo.domain.common.BaseEntity;
 import umc.springDemo.domain.enums.Gender;
 import umc.springDemo.domain.enums.UserStatus;
+import umc.springDemo.domain.mapping.UserPrefer;
 import umc.springDemo.domain.mapping.UserMission;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -28,10 +28,13 @@ public class User extends BaseEntity {
 
     private LocalDate birth;
 
+    @Column(length = 30)
+    private String address;
+
     @Column(nullable = false, length = 45)
     private String name;
 
-    @Column(nullable = false, length = 45)
+    //@Column(nullable = false, length = 45)
     private String eMail;
 
     @Column(length = 15)
@@ -47,6 +50,9 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserMission> userMissionList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserPrefer> userPreferList = new ArrayList<>();
 
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<Inquiry> inquiryList = new ArrayList<>();
