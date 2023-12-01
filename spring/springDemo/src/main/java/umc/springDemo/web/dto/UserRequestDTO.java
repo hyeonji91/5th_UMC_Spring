@@ -1,7 +1,7 @@
 package umc.springDemo.web.dto;
 
 import lombok.Getter;
-import umc.springDemo.validation.ExistCategories;
+import umc.springDemo.validation.annotation.ExistCategories;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -24,6 +24,7 @@ public class UserRequestDTO {
         Integer birthDay;
         @Size(min = 5, max = 30)
         String address;
+
         @ExistCategories
         List<Long> preferCategory;
     }

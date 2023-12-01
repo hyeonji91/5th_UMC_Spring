@@ -25,6 +25,7 @@ public class FoodCategoryCommandServiceImpl implements FoodCategoryCommandServic
 
     @Override
     public boolean existsById(Long id) {
+
         return foodCategoryRepository.existsById(id);
     }
 

@@ -36,4 +36,10 @@ public class RestaurantCommandServiceImpl implements RestaurantCommandService {
     public Optional<Restaurant> findById(Long id){
         return restaurantRepository.findById(id);
     }
+
+    @Override
+    public Boolean existsById(Long id){
+        return restaurantRepository.existsById(id);
+    }
+
 }

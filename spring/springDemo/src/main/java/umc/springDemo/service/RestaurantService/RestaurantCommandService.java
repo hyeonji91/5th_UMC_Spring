@@ -9,5 +9,5 @@ public interface RestaurantCommandService {
     Restaurant addRestaurant(RestaurantRequestDTO.AddRestaurantDTO request);
 
     Optional<Restaurant> findById(Long id);
-
+    Boolean existsById(Long id);
 }

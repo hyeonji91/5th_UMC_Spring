@@ -1,6 +1,7 @@
 package umc.springDemo.web.dto;
 
 import lombok.Getter;
+import umc.springDemo.validation.annotation.ExistRestaurants;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -16,6 +17,7 @@ public class ReviewRequestDTO {
         Double rating;
 
         @NotNull
+        @ExistRestaurants
         Long restaurantId;
 
         @NotNull
