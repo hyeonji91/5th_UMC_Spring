@@ -18,10 +18,12 @@ public class Restaurant extends BaseEntity {
     @Column(nullable = false, length = 45)
     private String restaurantName;
 
-    @Column(nullable = false, length = 45)
-    private String restaurantCategory;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
     private Region region;
+
+    public void setRegion(Region region){
+        this.region = region;
+    }
 }
