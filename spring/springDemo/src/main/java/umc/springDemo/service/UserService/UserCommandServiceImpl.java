@@ -15,6 +15,7 @@ import umc.springDemo.web.dto.UserRequestDTO;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,5 +40,10 @@ public class UserCommandServiceImpl implements UserCommandService{
         userPreferList.forEach(userPrefer -> {userPrefer.setUser(newUser);});
 
         return userRepository.save(newUser);
+    }
+
+    @Override
+    public Optional<User> findById(Long id){
+        return userRepository.findById(id);
     }
 }

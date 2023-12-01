@@ -3,25 +3,15 @@ package umc.springDemo.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import umc.springDemo.apiPayload.code.status.ErrorStatus;
-import umc.springDemo.apiPayload.exception.handler.FoodCategoryHandler;
 import umc.springDemo.apiPayload.exception.handler.RegionHandler;
 import umc.springDemo.converter.RestaurantConverter;
-import umc.springDemo.converter.UserConverter;
-import umc.springDemo.converter.UserPreferConverter;
-import umc.springDemo.domain.FoodCategory;
 import umc.springDemo.domain.Restaurant;
-import umc.springDemo.domain.User;
-import umc.springDemo.domain.mapping.UserPrefer;
-import umc.springDemo.repository.FoodCategoryRepository;
 import umc.springDemo.repository.RegionRepository;
 import umc.springDemo.repository.RestaurantRepository;
-import umc.springDemo.repository.UserRepository;
 import umc.springDemo.web.dto.RestaurantRequestDTO;
-import umc.springDemo.web.dto.UserRequestDTO;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -42,4 +32,8 @@ public class RestaurantCommandServiceImpl implements RestaurantCommandService {
         return restaurantRepository.save(newRestaurant);
     }
 
+    @Override
+    public Optional<Restaurant> findById(Long id){
+        return restaurantRepository.findById(id);
+    }
 }

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-public class RestaurantReponseDTO {
+public class RestaurantResponseDTO {
     @Builder
     @Getter
     @NoArgsConstructor

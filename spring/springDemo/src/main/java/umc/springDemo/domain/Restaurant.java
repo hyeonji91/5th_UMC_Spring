@@ -2,8 +2,11 @@ package umc.springDemo.domain;
 
 import lombok.*;
 import umc.springDemo.domain.common.BaseEntity;
+import umc.springDemo.domain.mapping.UserMission;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,6 +21,9 @@ public class Restaurant extends BaseEntity {
     @Column(nullable = false, length = 45)
     private String restaurantName;
 
+
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    private List<Review> reviewList = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")

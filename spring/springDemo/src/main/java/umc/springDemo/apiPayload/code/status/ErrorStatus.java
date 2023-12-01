@@ -19,7 +19,7 @@ public enum ErrorStatus implements BaseErrorCode {
 
     //멤버 관련 응답
     //member error
-    MEMBER_NOT_FOUND(HttpStatus.BAD_REQUEST, "MEMBER4001", "사용자가 없습니다."),
+    USER_NOT_FOUND(HttpStatus.BAD_REQUEST, "MEMBER4001", "사용자가 없습니다."),
     NICKNAME_NOT_EXIST(HttpStatus.BAD_REQUEST, "MEMBER4002", "닉네임은 필수입니다."),
 
     //article Error
@@ -33,6 +33,9 @@ public enum ErrorStatus implements BaseErrorCode {
 
     //region
     REGION_NOT_FOUND(HttpStatus.NOT_FOUND, "REGION4001", "없는 지역입니다")
+
+    //restaurant
+    ,RESTAURANT_NOT_FOUND(HttpStatus.NOT_FOUND, "RESTAURANT4001", "없는 식당입니다")
     ;
 
 

@@ -49,7 +49,7 @@ public class User extends BaseEntity {
     private Integer point;
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "varchar(20) default 'active'")
+    @Column(columnDefinition = "varchar(20) default 'ACTIVE'")
     private UserStatus status;
 
     private LocalDate inactiveDate;
