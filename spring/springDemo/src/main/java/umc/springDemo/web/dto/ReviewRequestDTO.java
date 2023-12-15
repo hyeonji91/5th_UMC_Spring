@@ -10,18 +10,18 @@ import java.util.List;
 public class ReviewRequestDTO {
     @Getter
     public static class PostReviewDTO {
-        @NotBlank
-        String reviewText;
-
-        @NotNull
-        Double rating;
-
         @NotNull
         @ExistRestaurants
         Long restaurantId;
 
         @NotNull
         Long userId;
+
+        @NotNull
+        Double rating;
+
+        @NotBlank
+        String reviewText;
 
         @NotNull
         List<String> reviewImg;
