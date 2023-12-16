@@ -4,30 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import umc.springDemo.domain.ReviewImg;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
-public class UserResponseDTO {
-
+public class MissionResponseDTO {
     @Builder
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class JoinReslutDTO{
-        Long userId;
-        LocalDateTime createdAt;
-    }
-
-
-    @Builder
-    @Getter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class GetMyReviewListDTO{
-        List<GetMyReviewDTO> myReviewList;
+    public static class MissonPreViewListDTO {
+        List<MissionPreViewDTO> missionList;
         Integer listSize;
         Integer totalPage;
         Long totalElements;
@@ -39,11 +26,10 @@ public class UserResponseDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class GetMyReviewDTO{
-        String ownerNickname;
-        Float score;
-        String body;
+    public static class MissionPreViewDTO{
+        Integer dDay;
+        Integer amount;
+        Integer point;
         LocalDate createdAt;
-        List<ReviewImg> reviewImg;
     }
 }

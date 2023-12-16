@@ -1,5 +1,7 @@
 package umc.springDemo.converter;
 
+import org.springframework.data.domain.Page;
+import umc.springDemo.domain.Review;
 import umc.springDemo.domain.User;
 import umc.springDemo.domain.enums.Gender;
 import umc.springDemo.web.dto.UserRequestDTO;
@@ -7,6 +9,8 @@ import umc.springDemo.web.dto.UserResponseDTO;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserConverter {
     public static UserResponseDTO.JoinReslutDTO toJoinResultDTO(User user){
@@ -39,5 +43,27 @@ public class UserConverter {
                 .userPreferList(new ArrayList<>())
                 .build();
 
+    }
+
+    public static UserResponseDTO.GetMyReviewDTO getMyReviewDTO(Review review){
+        return UserResponseDTO.GetMyReviewDTO.builder()
+                .ownerNickname(review.getUser().getName())
+                .score(review.getScore())
+                .createdAt(review.getCreatedAt().toLocalDate())
+                .body(review.getReviewBody())
+                .reviewImg(review.getReviewImgList())
+                .build();
+    }
+    public static UserResponseDTO.GetMyReviewListDTO getMyReviewListDTO(Page<Review> reviewList){
+        List<UserResponseDTO.GetMyReviewDTO> myReviewDTOList = reviewList.stream()
+                .map(UserConverter::getMyReviewDTO).collect(Collectors.toList());
+        return UserResponseDTO.GetMyReviewListDTO.builder()
+                .isLast(reviewList.isLast())
+                .isFirst(reviewList.isFirst())
+                .totalPage(reviewList.getTotalPages())
+                .totalElements(reviewList.getTotalElements())
+                .listSize(myReviewDTOList.size())
+                .myReviewList(myReviewDTOList)
+                .build();
     }
 }

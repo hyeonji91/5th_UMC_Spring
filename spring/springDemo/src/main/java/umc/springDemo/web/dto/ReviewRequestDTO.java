@@ -1,10 +1,15 @@
 package umc.springDemo.web.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import umc.springDemo.domain.ReviewImg;
 import umc.springDemo.validation.annotation.ExistRestaurants;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ReviewRequestDTO {
@@ -18,12 +23,16 @@ public class ReviewRequestDTO {
         Long userId;
 
         @NotNull
-        Double rating;
+        Float score;
 
         @NotBlank
-        String reviewText;
+        String reviewBody;
 
         @NotNull
-        List<String> reviewImg;
+        List<ReviewImgDTO> reviewImg;
+    }
+    @Getter
+    public static class ReviewImgDTO{
+        String imgUrl;
     }
 }

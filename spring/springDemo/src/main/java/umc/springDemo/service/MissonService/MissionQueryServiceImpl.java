@@ -1,13 +1,18 @@
-package umc.springDemo.service.UserService;
+package umc.springDemo.service.MissonService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import umc.springDemo.domain.Mission;
 import umc.springDemo.domain.Review;
 import umc.springDemo.domain.User;
+import umc.springDemo.domain.enums.MissionType;
+import umc.springDemo.domain.mapping.UserMission;
+import umc.springDemo.repository.MissionRepository;
 import umc.springDemo.repository.ReviewRepository;
+import umc.springDemo.repository.UserMissionRepository;
 import umc.springDemo.repository.UserRepository;
 
 import java.util.Optional;
@@ -15,20 +20,14 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class UserQueryServiceImpl implements UserQueryService{
-    private final UserRepository userRepository;
-    private final ReviewRepository reviewRepository;
+public class MissionQueryServiceImpl implements MissionQueryService {
+
+    public UserMissionRepository userMissionRepository;
+    public UserRepository userRepository;
     @Override
     public Optional<User> findUser(Long id) {
         return userRepository.findById(id);
     }
 
-    @Override
-    public Page<Review> getReviewList(Long userId, Integer page) {
 
-        User user = userRepository.findById(userId).get();
-
-        Page<Review> UserPage = reviewRepository.findAllByUser(user, PageRequest.of(page, 10));
-        return UserPage;
-    }
 }

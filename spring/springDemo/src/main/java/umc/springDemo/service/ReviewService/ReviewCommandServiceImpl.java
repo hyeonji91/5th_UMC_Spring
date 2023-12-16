@@ -36,12 +36,10 @@ public class ReviewCommandServiceImpl implements ReviewCommandService{
         User user =  userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new UserHandler(ErrorStatus.USER_NOT_FOUND));
 
-        newReview.setReview(
-                user,
-                user.getName(),
-                restaurantRepository.findById(request.getRestaurantId())
-                        .orElseThrow(()->new RestaurantHandler(ErrorStatus.RESTAURANT_NOT_FOUND))
-        );
+        Restaurant restaurant = restaurantRepository.findById(request.getRestaurantId())
+                .orElseThrow(()->new RestaurantHandler(ErrorStatus.RESTAURANT_NOT_FOUND));
+
+        newReview.setReview(user, user.getName(), restaurant);
 
         return reviewRepository.save(newReview);
     }

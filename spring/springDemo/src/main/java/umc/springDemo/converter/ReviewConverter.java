@@ -34,41 +34,43 @@ public class ReviewConverter {
     private static UserCommandServiceImpl userCommandService;
     private static RestaurantCommandServiceImpl restaurantCommandService;
 
-    //InvalidDataAccessApiUsageException
-    //    @Autowired
-//    ReviewConverter(  RestaurantCommandServiceImpl restaurantCommandService, UserCommandServiceImpl userCommandService){
-//        ReviewConverter.userCommandService = userCommandService;
-//        ReviewConverter.restaurantCommandService = restaurantCommandService;
-//    }
     public static ReviewResponseDTO.PostReviewResultDTO toPostReviewResultDTO(Review review){
         return ReviewResponseDTO.PostReviewResultDTO.builder()
                 .reviewId(review.getReviewId())
+                .createdAt(review.getCreatedAt())
+                .build();
+    }
+
+
+    public static List<ReviewImg> toReviewImgList(List<ReviewRequestDTO.ReviewImgDTO> reviewImgDTOList){
+//        reviewImg.stream().map(img -> ReviewImg.builder()
+//                .imgURL(img)
+//                .build()).collect(Collectors.toList());
+
+        return reviewImgDTOList.stream()
+                .map(imgDTO -> ReviewImg.builder().imgURL(imgDTO.getImgUrl()).build())
+                .collect(Collectors.toList());
+    }
+    public static Review toReview(ReviewRequestDTO.PostReviewDTO request){
+
+//        User user =  userCommandService.findById(request.getUserId())
+//                .orElseThrow(() -> new UserHandler(ErrorStatus.USER_NOT_FOUND));
+//        List<ReviewImg> foreginReviewImgList =
+//                request.getReviewImg().stream()
+//                .map(img -> ReviewImg.builder()
+//                        .imgURL(img)
+//                        .build()
+//                ).collect(Collectors.toList());
+
+
+        return Review.builder()
+                .reviewImgList(toReviewImgList(request.getReviewImg()))
+                .reviewBody(request.getReviewBody())
+                .score(request.getScore())
                 .createdAt(LocalDateTime.now())
                 .build();
     }
 
 
-    public static Review toReview(ReviewRequestDTO.PostReviewDTO request){
-
-//        User user =  userCommandService.findById(request.getUserId())
-//                .orElseThrow(() -> new UserHandler(ErrorStatus.USER_NOT_FOUND));
-        List<ReviewImg> foreginReviewImgList =
-                request.getReviewImg().stream()
-                .map(img -> ReviewImg.builder()
-                        .imgURL(img)
-                        .build()
-                ).collect(Collectors.toList());
-
-
-        return Review.builder()
-//                .user(user)
-//                .name(user.getName())
-//                .restaurant(restaurantCommandService.findById(request.getRestaurantId())
-//                        .orElseThrow(()->new RestaurantHandler(ErrorStatus.RESTAURANT_NOT_FOUND)))
-                .reviewImgList(foreginReviewImgList)
-                .text(request.getReviewText())
-                .rate(request.getRating())
-                .build();
-    }
 
 }

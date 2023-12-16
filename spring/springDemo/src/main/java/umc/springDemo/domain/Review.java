@@ -19,13 +19,10 @@ public class Review extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
 
-    @Column(nullable = false, length = 45)
-    private String name;
-
     @Column(nullable = false, length = 256)
-    private String text;
+    private String reviewBody;
 
-    private Double rate;
+    private Float score;
 
     private LocalDateTime createdAt;
 
@@ -42,7 +39,6 @@ public class Review extends BaseEntity {
 
     public void setReview(User user, String name, Restaurant restaurant){
         this.user = user;
-        this.name = name;
         this.restaurant = restaurant;
     }
 }
