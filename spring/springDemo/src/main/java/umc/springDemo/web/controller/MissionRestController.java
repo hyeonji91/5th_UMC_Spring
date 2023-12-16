@@ -16,6 +16,7 @@ import umc.springDemo.converter.UserMissionConverter;
 import umc.springDemo.domain.Mission;
 import umc.springDemo.domain.mapping.UserMission;
 import umc.springDemo.service.UserMissionService.UserMissionCommandService;
+import umc.springDemo.validation.annotation.CheckPage;
 import umc.springDemo.validation.annotation.ExistRestaurants;
 import umc.springDemo.web.dto.*;
 
@@ -40,7 +41,7 @@ public class MissionRestController {
     @Operation(summary = "특정 유저가 진행 중인 미션 목록 조회 API",description = "특정 유저가 진행 중인 미션들의 목록을 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")
     public ApiResponse<MissionResponseDTO.MissonPreViewListDTO> getMissionList(
             @ExistRestaurants @PathVariable(name = "userId") Long userId
-            , @RequestParam(name = "page") Integer page){
+            , @CheckPage @RequestParam(name = "page") Integer page){
         Page<UserMission> mission= userMissionCommandService.getMissionList(userId, page);
         return ApiResponse.onSuccess(UserMissionConverter.missonPreViewListDTO(mission));
     }

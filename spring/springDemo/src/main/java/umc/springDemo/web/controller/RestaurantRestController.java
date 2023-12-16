@@ -18,6 +18,7 @@ import umc.springDemo.domain.Review;
 import umc.springDemo.service.RestaurantService.RestaurantCommandService;
 import umc.springDemo.service.RestaurantService.RestaurantQueryService;
 import umc.springDemo.service.ReviewService.ReviewCommandService;
+import umc.springDemo.validation.annotation.CheckPage;
 import umc.springDemo.validation.annotation.ExistRestaurants;
 import umc.springDemo.web.dto.RestaurantResponseDTO;
 import umc.springDemo.web.dto.RestaurantRequestDTO;
@@ -80,7 +81,7 @@ public class RestaurantRestController {
     })
     public ApiResponse<RestaurantResponseDTO.MissonPreViewListDTO> getMissionList(
             @ExistRestaurants @PathVariable(name = "storeId") Long storeId
-            , @RequestParam(name = "page") Integer page){
+            , @CheckPage @RequestParam(name = "page") Integer page){
         Page<Mission> mission= restaurantQueryService.getMissionList(storeId, page);
         return ApiResponse.onSuccess(RestaurantConverter.missonPreViewListDTO(mission));
     }

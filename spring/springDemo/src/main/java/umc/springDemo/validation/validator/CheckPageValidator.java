@@ -24,13 +24,17 @@ public class CheckPageValidator implements ConstraintValidator<CheckPage, Intege
     @Override
     public boolean isValid(Integer value, ConstraintValidatorContext context) {
 
-        int page = value;
-        if(page<0){
+        //int page = value;
+        if(value<1){
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(ErrorStatus.PAGE_NOT_FOUND.toString()).addConstraintViolation();
+            System.out.println("checkpage page<=0================");
             return false;
         }
-        else return true;
+        else {
+            System.out.println("checkpage true================");
+            return true;
+        }
 
 
     }
