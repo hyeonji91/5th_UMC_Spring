@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.springDemo.apiPayload.ApiResponse;
 import umc.springDemo.converter.UserConverter;
@@ -26,6 +27,7 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/users")
+@Validated
 public class UserRestController {
     private final UserCommandService userCommandService;
     private final UserQueryService userQueryService;
@@ -51,7 +53,7 @@ public class UserRestController {
     public ApiResponse<UserResponseDTO.GetMyReviewListDTO> getReviewList(
             @ExistRestaurants @PathVariable(name = "userId") Long userId
             , @CheckPage @RequestParam(name = "page") Integer page){
-        Page<Review> review = userQueryService.getReviewList(userId,page);
+        Page<Review> review = userQueryService.getReviewList(userId,page-1);
         return ApiResponse.onSuccess(UserConverter.getMyReviewListDTO(review));
     }
 }

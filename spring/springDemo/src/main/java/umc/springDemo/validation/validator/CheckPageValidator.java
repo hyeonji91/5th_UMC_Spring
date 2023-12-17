@@ -28,11 +28,9 @@ public class CheckPageValidator implements ConstraintValidator<CheckPage, Intege
         if(value<1){
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(ErrorStatus.PAGE_NOT_FOUND.toString()).addConstraintViolation();
-            System.out.println("checkpage page<=0================");
             return false;
         }
         else {
-            System.out.println("checkpage true================");
             return true;
         }
 

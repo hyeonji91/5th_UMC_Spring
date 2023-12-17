@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.springDemo.apiPayload.ApiResponse;
 import umc.springDemo.converter.RestaurantConverter;
@@ -29,6 +30,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
+@Validated
 @RequestMapping("/restaurants")
 public class RestaurantRestController {
     private final RestaurantCommandService restaurantCommandService;
@@ -61,8 +63,8 @@ public class RestaurantRestController {
     })
     public ApiResponse<RestaurantResponseDTO.ReviewPreViewListDTO> getReviewList(
             @ExistRestaurants @PathVariable(name = "storeId") Long storeId
-            , @RequestParam(name = "page") Integer page){
-        Page<Review> review= restaurantQueryService.getReviewList(storeId, page);
+            , @CheckPage @RequestParam(name = "page") Integer page){
+        Page<Review> review= restaurantQueryService.getReviewList(storeId, page-1);
         return ApiResponse.onSuccess(RestaurantConverter.reviewPreViewListDTO(review));
         //return null;
     }
@@ -82,7 +84,7 @@ public class RestaurantRestController {
     public ApiResponse<RestaurantResponseDTO.MissonPreViewListDTO> getMissionList(
             @ExistRestaurants @PathVariable(name = "storeId") Long storeId
             , @CheckPage @RequestParam(name = "page") Integer page){
-        Page<Mission> mission= restaurantQueryService.getMissionList(storeId, page);
+        Page<Mission> mission= restaurantQueryService.getMissionList(storeId, page-1);
         return ApiResponse.onSuccess(RestaurantConverter.missonPreViewListDTO(mission));
     }
 }

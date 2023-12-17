@@ -32,14 +32,14 @@ public class RestaurantQueryServiceImpl implements RestaurantQueryService{
     public Page<Review> getReviewList(Long RestaurantId, Integer page){
         Restaurant restaurant = restaurantRepository.findById(RestaurantId).get();
 
-        Page<Review> RestaurantPage = reviewRepository.findAllByRestaurant(restaurant, PageRequest.of(page-1,10));
+        Page<Review> RestaurantPage = reviewRepository.findAllByRestaurant(restaurant, PageRequest.of(page,10));
         return RestaurantPage;
     }
 
     @Override
     public Page<Mission> getMissionList(Long RestaurantId, Integer page){
         Restaurant restaurant = restaurantRepository.findById(RestaurantId).get();
-        Page<Mission> RestaurantPage = missionRepository.findAllByRestaurant(restaurant, PageRequest.of(page-1, 10));
+        Page<Mission> RestaurantPage = missionRepository.findAllByRestaurant(restaurant, PageRequest.of(page, 10));
         return RestaurantPage;
     }
 

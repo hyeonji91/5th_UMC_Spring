@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.springDemo.apiPayload.ApiResponse;
 import umc.springDemo.converter.MissionConverter;
@@ -24,6 +25,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
+@Validated
 @RequestMapping("/missions")
 public class MissionRestController {
     private final UserMissionCommandService userMissionCommandService;
@@ -42,7 +44,7 @@ public class MissionRestController {
     public ApiResponse<MissionResponseDTO.MissonPreViewListDTO> getMissionList(
             @ExistRestaurants @PathVariable(name = "userId") Long userId
             , @CheckPage @RequestParam(name = "page") Integer page){
-        Page<UserMission> mission= userMissionCommandService.getMissionList(userId, page);
+        Page<UserMission> mission= userMissionCommandService.getMissionList(userId, page-1);
         return ApiResponse.onSuccess(UserMissionConverter.missonPreViewListDTO(mission));
     }
 }

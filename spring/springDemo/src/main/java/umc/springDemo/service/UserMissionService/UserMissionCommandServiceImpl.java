@@ -1,6 +1,8 @@
 package umc.springDemo.service.UserMissionService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -16,13 +18,15 @@ import umc.springDemo.web.dto.MissionPatchRequestDTO;
 import umc.springDemo.web.dto.UserMissionPatchRequestDTO;
 
 import javax.transaction.Transactional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j //logger
 public class UserMissionCommandServiceImpl implements UserMissionCommandService{
     private final UserMissionRepository userMissionRepository;
     private final UserRepository userRepository;
-
     @Override
     @Transactional
     public UserMission patchUserMissionToDoing(Long missionId, UserMissionPatchRequestDTO.PatchUserMissionDTO request) {
@@ -40,8 +44,10 @@ public class UserMissionCommandServiceImpl implements UserMissionCommandService{
     }
     @Override
     public Page<UserMission> getMissionList(Long UserId, Integer page) {
+        log.trace("trace log={}", page);
+        log.info("info log={}", page);
         User user = userRepository.findById(UserId).get();
-        Page<UserMission> MissionPage = userMissionRepository.findAllByUserAndMissionType(user, MissionType.doing, PageRequest.of(page-1, 10));
+        Page<UserMission> MissionPage = userMissionRepository.findAllByUserAndMissionType(user, MissionType.doing, PageRequest.of(page, 10));
         return MissionPage;
     }
 }
